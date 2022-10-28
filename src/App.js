@@ -10,7 +10,7 @@ const App = () => {
         const getPosts = async() => {
             try {
                 const result = await fetchPosts()
-                setPosts(result)
+                setPosts(result);
             } catch(error) {
                 console.error(error)
             }
