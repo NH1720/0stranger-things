@@ -25,8 +25,9 @@ const App = () => {
 useEffect(() => {
     if (token) {
         const getUser = async () => {
-            const {user} = await fetchUser(token);
-            setGuest(user.username)
+            const {users} = await fetchUser(token);
+            console.log("username", users)
+            setGuest(users.username)
         }
         getUser();
     }
