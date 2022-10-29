@@ -50,6 +50,7 @@ export const fetchUser = async (token) => {
         console.log("user-response", response);
         const {data} = await response.json();
         console.log("user-data", data)
+        return data;
     } catch (error) {
         console.error(error);
     }
