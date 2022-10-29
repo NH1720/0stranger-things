@@ -6,15 +6,18 @@ import "./App.css"
 
 const App = () => {
     const [posts, setPosts] = useState([]);
-    const [token, setToken] = useState(window.localStorage.getItem("token") || "");
+    const [token, setToken] = useState(window.localStorage.getItem("token") || null);
     const [user, setUser] = useState(null);
     const history = useHistory();
 
     useEffect(() => {
         const getPosts = async () => {
             try {
-                const result = await fetchPosts()
-                setPosts(result);
+                const {error, posts} = await fetchPosts()
+                if (error) {
+                    console.error(error);
+                }
+                setPosts(posts);
             } catch(error) {
                 console.error(error)
             }
