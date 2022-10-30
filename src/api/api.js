@@ -37,9 +37,11 @@ export const callAPI = async (endpointPath, defaultOptions={}) => {
    
 
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (token) => {
     try {
-        const {success, error, data} = await callAPI('/posts');
+        const {success, error, data} = await callAPI('/posts', {
+            token: token,
+        });
 
         if (success) {
             return {error: null, posts: data.posts}
@@ -96,6 +98,49 @@ return {
 }; 
 
 
+
+
+
+
+export const loginUser = async(username, password) => {
+    try {
+       const {success, error, data} = await callAPI('/users/login', {
+            method: "POST",
+            body: {
+                user: {
+                    username,
+                    password,
+                },
+            }
+        });
+        console.log(data)
+        if (success) {
+            return {
+                error: null, 
+                token: data.token,
+                message: data.message,
+            }
+        } else {
+            return {
+                error: error.message,
+                token: null,
+                message: null,
+            }
+        }
+    } catch(error) {
+    console.error('There was an error when registering the user', error);
+    
+    return {
+        error: "Registration Failed.",
+        token: null, 
+        message: null,
+    }
+    }
+    }; 
+
+
+
+
 export const fetchUser = async (token) => {
 try {
     const {success, error, data} = await callAPI('/users/me', {
@@ -128,7 +173,7 @@ try {
 export const createPost = async (token, title, description, price, location, willdeliver) => {
    try {
     const {success, error, data} = await callAPI('/posts', {
-        token: token.token,
+        token: token,
         method: 'POST', 
         body: {
             post: {
@@ -140,8 +185,7 @@ export const createPost = async (token, title, description, price, location, wil
             }
         }
     });
-    console.log('createPost token test', token);
-    console.log(typeof token)
+    console.log(data)
     if (success) {
         return {
             error: null,

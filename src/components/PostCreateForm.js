@@ -1,31 +1,33 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {createPost} from "../api/api";
-import Posts from "./Posts";
 
 
-const PostCreateForm = (token, setPosts) => {
+const PostCreateForm = ({token, setPosts}) => {
     const history = useHistory();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [location, setLocation] = useState(''); 
+    const [errorMessage, setErrorMessage] = useState(null);
     return (
     <form className="ui form" onSubmit={ async (event) => {
         event.preventDefault();
 
-       const {error, post} = createPost(token, title, description, price, location);
+       const {error, post} = await createPost(token, title, description, price, location);
 
        if (post) {
-        setPosts((prevPosts) => [...prevPosts, posts]);
+        setPosts((prevPosts) => [...prevPosts, post]);
         setTitle('');
         setDescription('');
         setPrice('');
         setLocation('');
         history.push('/posts')
        } else {
-
+            alert('Something went wrong!')
+            console.error(error);
        }
+       
     }}>
         <h4>Create Post</h4>
         <div className="field">
