@@ -23,7 +23,7 @@ const App = () => {
             }
         }; 
         getPosts();
-    }, []);
+    }, [token]);
 
 useEffect(() => {
     if (token) {
@@ -78,7 +78,7 @@ const logout = () => {
                     <PostCreateForm token={token} setPosts={setPosts} />
                 </Route>
                 <Route className="item" path="/posts">
-                    <Posts posts={posts}/>
+                    <Posts posts={posts} token={token} setPosts={setPosts}/>
                 </Route>
                 <Route className="item" path="/accountform/:action">
                     <AccountForm setToken={setToken}/>
