@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Home, Posts, AccountForm } from "./components"
+import {Home, Posts, AccountForm, PostCreateForm } from "./components"
 import {Route, Switch, Link, useHistory} from "react-router-dom";
 import { fetchPosts, fetchUser } from "./api/api";
 import "./App.css"
@@ -37,12 +37,16 @@ useEffect(() => {
 }, [token])
 
 useEffect(() => {
-    window.localStorage.setItem("token", token)
+    if (token) {
+        window.localStorage.setItem("token", token)
+    } else {
+        window.localStorage.removeItem("token")
+    }
 }, [token]);
 
 
 const logout = () => {
-    setToken("");
+    setToken(null);
     setUser(null);
     history.push("/");
 }
@@ -69,6 +73,9 @@ const logout = () => {
             <Switch>
                 <Route exact path="/">
                     <Home user={user} />
+                </Route>
+                <Route className="item" path="/posts/create">
+                    <PostCreateForm token={token} setPosts={setPosts} />
                 </Route>
                 <Route className="item" path="/posts">
                     <Posts posts={posts}/>
