@@ -25,13 +25,22 @@ const Posts = ({posts, setPosts, token}) => {
 
     return (
     <>
-        <div className="ui icon input">
+        <div id='search-newpost'>
+            <div className="ui icon input">
+                <input type="text" placeholder="Search..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}/>
+                <i aria-hidden="true" className="search icon"></i>
+            </div>
+            <Link to="/posts/create" className="ui button">Create Post</Link>
+        </div>
+        {/* <div className="ui icon input">
             <input type="text" placeholder="Search..."
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}/>
             <i aria-hidden="true" className="search icon"></i>
         </div>
-        <Link to="/posts/create" className="ui button">Create Post</Link>
+        <Link to="/posts/create" className="ui button">Create Post</Link> */}
         <div className="posts-container">
           {filteredPosts.map((item) => {
             return <PostItem key={item._id} posts={item} setPosts={setPosts} token={token}/>;

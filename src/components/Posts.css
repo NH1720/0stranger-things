@@ -1,8 +1,4 @@
-.posts-container {
-    padding: 20px; 
-    
-}
-
-.ui.card {
-    padding: 10px 10px;
+#search-newpost {
+    display: flex;
+    justify-content: space-between;
 }
