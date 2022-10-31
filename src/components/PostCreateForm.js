@@ -24,7 +24,7 @@ const PostCreateForm = ({token, setPosts}) => {
         setLocation('');
         history.push('/posts')
        } else {
-            alert('Something went wrong!')
+            alert('Something went wrong! Please make sure you are signed up or logged in!')
             console.error(error);
        }
        
@@ -47,12 +47,6 @@ const PostCreateForm = ({token, setPosts}) => {
             <input name='price'type='text' placeholder="$" required autoComplete="off"
             value={price} 
             onChange={(event) => setPrice(event.target.value)}></input>
-        </div>
-        <div className="field">
-            <label htmlFor="location">Location</label>
-            <input name='location'type='text' placeholder="Location"  autoComplete="off"
-            value={location} 
-            onChange={(event) => setLocation(event.target.value)}></input>
         </div>
 
         <button type="submit" className="ui button">Create</button>

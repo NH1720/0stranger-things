@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Home, Posts, AccountForm, PostCreateForm } from "./components"
+import {Home, Posts, PostDetail, AccountForm, PostCreateForm } from "./components"
 import {Route, Switch, Link, useHistory} from "react-router-dom";
 import { fetchPosts, fetchUser } from "./api/api";
 import "./App.css"
@@ -76,6 +76,9 @@ const logout = () => {
                 </Route>
                 <Route className="item" path="/posts/create">
                     <PostCreateForm token={token} setPosts={setPosts} />
+                </Route>
+                <Route className="item" path="/posts/:postID">
+                    <PostDetail token={token} posts={posts}/>
                 </Route>
                 <Route className="item" path="/posts">
                     <Posts posts={posts} token={token} setPosts={setPosts}/>
