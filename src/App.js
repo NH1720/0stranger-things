@@ -29,7 +29,6 @@ useEffect(() => {
     if (token) {
         const getUser = async () => {
             const {username} = await fetchUser(token);
-            console.log("username", username)
             setUser(username)
         }
         getUser();
@@ -57,6 +56,7 @@ const logout = () => {
             <nav className="ui secondary menu">
                 <Link className="item" to="/">Home</Link>
                 <Link className="item" to="/posts">Posts</Link>
+                
 
                 <div className="right menu">
                     {token ? (

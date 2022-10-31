@@ -9,8 +9,6 @@ const PostDetail = (props) => {
     const [newMessage, setNewMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
 
-    console.log(newMessage);
-
     const singlePost = posts.find((onePost) => {
        const foundPost = onePost._id == postID;
        return foundPost;

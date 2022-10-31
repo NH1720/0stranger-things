@@ -28,7 +28,6 @@ export const callAPI = async (endpointPath, defaultOptions={}) => {
     if (body) {
         options.body = JSON.stringify(body);
     }
-    console.log('token test', token)
     const response = await fetch(`${BASEURL}${endpointPath}`, options);
     const result = await response.json();
 
@@ -113,7 +112,6 @@ export const loginUser = async(username, password) => {
                 },
             }
         });
-        console.log(data)
         if (success) {
             return {
                 error: null, 
@@ -146,7 +144,6 @@ try {
     const {success, error, data} = await callAPI('/users/me', {
         token: token, 
     }); 
-    console.log(data, 'data in fetchUser')
     if (success) {
         return {
             error: null, 

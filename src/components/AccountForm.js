@@ -8,15 +8,12 @@ const AccountForm = ({ setToken }) => {
     const [password, setPassword] = useState("");
     const {action} = useParams();
     const history = useHistory()
-    console.log('action', action);
 
 
     const onSubmitHandler = async (event) => {
-        console.log(username, password);
         event.preventDefault();
         const authFn = action === 'register' ? registerUser : loginUser; 
         const {error, token, message} = await authFn(username, password);
-        console.log(error);
         setToken(token);
         if (token) {
             history.push("/posts");
